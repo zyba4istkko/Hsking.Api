@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hsking.Api", "Hsking.Api\Hsking.Api.csproj", "{FB85CC97-652B-4081-97F7-51A6CD61300A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hsking.Api.Controllers", "Hsking.Api.Controllers\Hsking.Api.Controllers.csproj", "{ED309A82-1FB0-4DB0-B019-2207BE827B06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hsking.Api.Dao", "Hsking.Api.Dao\Hsking.Api.Dao.csproj", "{3ABE8857-5E27-45C7-B2D9-5BD509065613}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hsking.Api.Dto", "Hsking.Api.Dto\Hsking.Api.Dto.csproj", "{3BAAD2BB-F22C-46C0-8AD4-C35020C69317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hsking.Api.EfDao", "Hsking.Api.EfDao\Hsking.Api.EfDao.csproj", "{04E63A31-B088-4259-A845-418CFF94516B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{AF383499-A0AD-4BF7-BB5C-AFF4BC122DA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hsking.Api.Dependencies", "Hsking.Api.Dependencies\Hsking.Api.Dependencies.csproj", "{D9838686-4ECC-4011-9654-D5A13226E1F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{88DD19D3-8379-4FED-B8F3-644D8492B7AA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB85CC97-652B-4081-97F7-51A6CD61300A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB85CC97-652B-4081-97F7-51A6CD61300A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB85CC97-652B-4081-97F7-51A6CD61300A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB85CC97-652B-4081-97F7-51A6CD61300A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED309A82-1FB0-4DB0-B019-2207BE827B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED309A82-1FB0-4DB0-B019-2207BE827B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED309A82-1FB0-4DB0-B019-2207BE827B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED309A82-1FB0-4DB0-B019-2207BE827B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ABE8857-5E27-45C7-B2D9-5BD509065613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABE8857-5E27-45C7-B2D9-5BD509065613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABE8857-5E27-45C7-B2D9-5BD509065613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABE8857-5E27-45C7-B2D9-5BD509065613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BAAD2BB-F22C-46C0-8AD4-C35020C69317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BAAD2BB-F22C-46C0-8AD4-C35020C69317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BAAD2BB-F22C-46C0-8AD4-C35020C69317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BAAD2BB-F22C-46C0-8AD4-C35020C69317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E63A31-B088-4259-A845-418CFF94516B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E63A31-B088-4259-A845-418CFF94516B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E63A31-B088-4259-A845-418CFF94516B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E63A31-B088-4259-A845-418CFF94516B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9838686-4ECC-4011-9654-D5A13226E1F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9838686-4ECC-4011-9654-D5A13226E1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9838686-4ECC-4011-9654-D5A13226E1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9838686-4ECC-4011-9654-D5A13226E1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9838686-4ECC-4011-9654-D5A13226E1F0} = {AF383499-A0AD-4BF7-BB5C-AFF4BC122DA9}
+	EndGlobalSection
+EndGlobal

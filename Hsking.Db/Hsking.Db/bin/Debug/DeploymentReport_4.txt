@@ -1,0 +1,23 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Habits]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       unnamed constraint on [dbo].[Habits] (Default Constraint)
+     Table rebuild
+       [dbo].[Habits] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_Habits_Category] (Foreign Key)
+       [dbo].[FK_Habits_Types] (Foreign Key)
+     Create
+       [dbo].[FK_Habits_Category] (Foreign Key)
+       [dbo].[FK_Habits_Types] (Foreign Key)

@@ -1,0 +1,41 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Categories]
+       [dbo].[Habits]
+       [dbo].[Types]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column Id in table [dbo].[Categories] is currently  BIGINT IDENTITY (1, 1) NOT NULL but is being changed to
+          UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+       The type for column CategoryId in table [dbo].[Habits] is currently  BIGINT NOT NULL but is being changed to 
+         UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+       The type for column Id in table [dbo].[Habits] is currently  BIGINT IDENTITY (1, 1) NOT NULL but is being changed to 
+         UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+       The type for column TypeId in table [dbo].[Habits] is currently  BIGINT NOT NULL but is being changed to 
+         UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+       The type for column Id in table [dbo].[Types] is currently  BIGINT IDENTITY (1, 1) NOT NULL but is being changed to 
+         UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+
+** User actions
+     Table rebuild
+       [dbo].[Categories] (Table)
+       [dbo].[Habits] (Table)
+       [dbo].[Types] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_Habits_Category] (Foreign Key)
+       [dbo].[FK_Habits_Types] (Foreign Key)
+     Create
+       [dbo].[FK_Habits_Category] (Foreign Key)
+       [dbo].[FK_Habits_Types] (Foreign Key)
+
+The type for column Id in table [dbo].[Categories] is currently  BIGINT IDENTITY (1, 1) NOT NULL but is being changed to  UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+The type for column CategoryId in table [dbo].[Habits] is currently  BIGINT NOT NULL but is being changed to  UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+The type for column Id in table [dbo].[Habits] is currently  BIGINT IDENTITY (1, 1) NOT NULL but is being changed to  UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+The type for column TypeId in table [dbo].[Habits] is currently  BIGINT NOT NULL but is being changed to  UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+The type for column Id in table [dbo].[Types] is currently  BIGINT IDENTITY (1, 1) NOT NULL but is being changed to  UNIQUEIDENTIFIER NOT NULL. There is no implicit or explicit conversion.
+
