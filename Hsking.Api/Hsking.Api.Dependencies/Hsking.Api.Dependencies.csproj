@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="CastleDependencyResolver.cs" />
     <Compile Include="CastleInstaller.cs" />
+    <Compile Include="Installers\AuthInstaller.cs" />
     <Compile Include="Installers\ControllersInstaller.cs" />
     <Compile Include="Installers\RepositoriesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

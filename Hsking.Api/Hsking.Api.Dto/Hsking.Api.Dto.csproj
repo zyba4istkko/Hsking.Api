@@ -61,8 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthUsers\ApplicationUser.cs" />
     <Compile Include="Dtos\CategoryDto.cs" />
     <Compile Include="Dtos\HabitDto.cs" />
+    <Compile Include="Dtos\ProfileDto.cs" />
     <Compile Include="Dtos\TypeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -22,10 +22,6 @@ namespace Hsking.Api.EfDao
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTimeOffset> CreatedAt { get; set; }
-        public bool Deleted { get; set; }
-        public Nullable<System.DateTimeOffset> UpdatedAt { get; set; }
-        public byte[] Version { get; set; }
     
         public virtual ICollection<Habit> Habits { get; set; }
     }

@@ -8,10 +8,10 @@ namespace Hsking.Api.EfDao.Base
 {
     public class GenericRepository<T> : IDisposable, IGenericRepository<T> where T : class
     {
-        protected readonly EfContext Db;
+        protected readonly Hsking_dbEntities3 Db;
         private readonly DbSet<T> _table;
 
-        public GenericRepository(EfContext db)
+        public GenericRepository(Hsking_dbEntities3 db)
         {
             Db = db;
             _table = db.Set<T>();

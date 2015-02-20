@@ -13,9 +13,9 @@ namespace Hsking.Api.EfDao
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EfContext : DbContext
+    public partial class Hsking_dbEntities3 : DbContext
     {
-        public EfContext()
+        public Hsking_dbEntities3()
             : base("name=Hsking_dbEntities3")
         {
         }
@@ -27,6 +27,8 @@ namespace Hsking.Api.EfDao
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Habit> Habits { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Type> Types { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -118,8 +118,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthManagers\CustomPasswordHasher.cs" />
+    <Compile Include="AuthManagers\CustomUserManager.cs" />
+    <Compile Include="AuthManagers\CustomUserStore.cs" />
+    <Compile Include="Emails\AuthEmailService.cs" />
+    <Compile Include="Emails\Mailers\IUserMailer.cs" />
+    <Compile Include="Emails\Mailers\UserMailer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAuthRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IProfileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hsking.Api.Dto\Hsking.Api.Dto.csproj">

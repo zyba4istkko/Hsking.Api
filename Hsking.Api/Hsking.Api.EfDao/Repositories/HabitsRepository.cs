@@ -8,7 +8,7 @@ namespace Hsking.Api.EfDao.Repositories
 {
     public class HabitsRepository : GenericRepository<Habit>, IHabitsRepository
     {
-        public HabitsRepository(EfContext context)
+        public HabitsRepository(Hsking_dbEntities3 context)
             : base(context)
         {
 

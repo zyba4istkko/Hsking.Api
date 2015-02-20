@@ -22,10 +22,6 @@ namespace Hsking.Api.EfDao
         public string ImageUrl { get; set; }
         public long CategoryId { get; set; }
         public long TypeId { get; set; }
-        public Nullable<System.DateTimeOffset> CreatedAt { get; set; }
-        public bool Deleted { get; set; }
-        public Nullable<System.DateTimeOffset> UpdatedAt { get; set; }
-        public byte[] Version { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Type Type { get; set; }
