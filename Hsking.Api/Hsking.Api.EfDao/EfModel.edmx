@@ -55,6 +55,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="DateRegister" Type="datetime" Nullable="false" />
+          <Property Name="EmailStamp" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_Habits_Category">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
@@ -190,6 +191,7 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="DateRegister" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Profile" Relationship="EfContext.FK_Profiles_USERS" FromRole="User" ToRole="Profile" />
+          <Property Name="EmailStamp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Habits_Category">
           <End Type="EfContext.Category" Role="Category" Multiplicity="1" />
@@ -282,6 +284,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="EfContext.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="EmailStamp" ColumnName="EmailStamp" />
                 <ScalarProperty Name="DateRegister" ColumnName="DateRegister" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

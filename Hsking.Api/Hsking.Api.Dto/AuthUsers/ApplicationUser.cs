@@ -12,10 +12,6 @@ namespace Hsking.Api.Dto.AuthUsers
         public long Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
-
         public string EmailStamp { get; set; }
-        public bool ConfirmEmail { get; set; }
-
-        public bool IsFilled { get; set; }
     }
 }

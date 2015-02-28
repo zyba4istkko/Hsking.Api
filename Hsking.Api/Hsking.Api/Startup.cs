@@ -28,8 +28,8 @@ namespace Hsking.Api
         public void ConfigureOAuth(IAppBuilder app, IWindsorContainer container)
         {
             ////// Token Generation
-            //app.UseOAuthAuthorizationServer(container.Resolve<OAuthAuthorizationServerOptions>());
-            //app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthAuthorizationServer(container.Resolve<OAuthAuthorizationServerOptions>());
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
         }
 

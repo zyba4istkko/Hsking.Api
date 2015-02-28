@@ -317,6 +317,42 @@
             </summary>
             <returns>An enumerable of loaded assemblies.</returns>
         </member>
+        <member name="M:RazorEngine.Compilation.CompilerServicesUtility.CSharpGetRawTypeName(System.Type)">
+            <summary>
+            Return the raw type name (including namespace) without any generic arguments.
+            Returns the typename in a way it can be used in C# code.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RazorEngine.Compilation.CompilerServicesUtility.VBGetRawTypeName(System.Type)">
+            <summary>
+            Return the raw type name (including namespace) without any generic arguments.
+            Returns the typename in a way it can be used in VB.net code.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RazorEngine.Compilation.CompilerServicesUtility.CSharpCreateGenericType(System.Type,System.String,System.Boolean)">
+            <summary>
+            Return the raw type name (including namespace) with the given modelTypeName as generic argument (if applicable).
+            Returns the typename in a way it can be used in C# code.
+            </summary>
+            <param name="templateType"></param>
+            <param name="modelTypeName"></param>
+            <param name="throwWhenNotGeneric"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RazorEngine.Compilation.CompilerServicesUtility.VBCreateGenericType(System.Type,System.String,System.Boolean)">
+            <summary>
+            Return the raw type name (including namespace) with the given modelTypeName as generic argument (if applicable).
+            Returns the typename in a way it can be used in VB.net code.
+            </summary>
+            <param name="templateType"></param>
+            <param name="modelTypeName"></param>
+            <param name="throwWhenNotGeneric"></param>
+            <returns></returns>
+        </member>
         <member name="T:RazorEngine.CrossAppDomainObject">
             <summary>
             Enables access to objects across application domain boundaries.
@@ -5189,7 +5225,7 @@
             <param name="model"></param>
             <param name="viewBag"></param>
         </member>
-        <member name="M:RazorEngine.Templating.RazorEngineService.GetTemplate(RazorEngine.Templating.ITemplateKey,System.Type,System.Object)">
+        <member name="M:RazorEngine.Templating.RazorEngineService.GetTemplate(RazorEngine.Templating.ITemplateKey,System.Type,System.Object,RazorEngine.Templating.DynamicViewBag)">
             <summary>
             Helper method for the legacy <see cref="T:RazorEngine.Templating.TemplateService"/> class.
             </summary>
@@ -5361,7 +5397,7 @@
             Defines the required contract for implementing a template.
             </summary>
         </member>
-        <member name="M:RazorEngine.Templating.ITemplate.SetModel(System.Object)">
+        <member name="M:RazorEngine.Templating.ITemplate.SetData(System.Object,RazorEngine.Templating.DynamicViewBag)">
             <summary>
             Set the model of the template (if applicable).
             </summary>
@@ -5407,10 +5443,26 @@
             Sets the cached template service.
             </summary>
         </member>
+        <member name="F:RazorEngine.Templating.TemplateBase.modelInit">
+            <summary>
+            Because the old API (TemplateService) is designed in a way to make it impossible to init
+            the model and the Viewbag at the same time (and because of backwards compatibility),
+            we need to call the SetData method twice (only from within TemplateService so we can remove this bool once that has been removed).
+            
+            But the secound call we only need to set the Viewbag, therefore we save the state in this bool.
+            </summary>
+        </member>
         <member name="M:RazorEngine.Templating.TemplateBase.#ctor">
             <summary>
             Initialises a new instance of <see cref="T:RazorEngine.Templating.TemplateBase"/>.
             </summary>
+        </member>
+        <member name="M:RazorEngine.Templating.TemplateBase.SetData(System.Object,RazorEngine.Templating.DynamicViewBag)">
+            <summary>
+            Set the data for this template.
+            </summary>
+            <param name="model">the model object for the current run.</param>
+            <param name="viewbag">the viewbag for the current run.</param>
         </member>
         <member name="M:RazorEngine.Templating.TemplateBase.SetModel(System.Object)">
             <summary>
@@ -5859,11 +5911,6 @@
         </member>
         <member name="M:RazorEngine.Templating.ExecuteContext.#ctor">
             <summary>
-            Creates a new instance of ExecuteContext with an empty ViewBag.
-            </summary>
-        </member>
-        <member name="M:RazorEngine.Templating.ExecuteContext.#ctor(RazorEngine.Templating.DynamicViewBag)">
-            <summary>
             Creates a new instance of DynamicViewBag, setting initial values in the ViewBag.
             </summary>
             <param name="viewBag">The initial view bag data or NULL for an empty ViewBag.</param>
@@ -5912,17 +5959,12 @@
             Gets the current writer.
             </summary>
         </member>
-        <member name="P:RazorEngine.Templating.ExecuteContext.ViewBag">
-            <summary>
-            Gets the viewbag that allows sharing state.
-            </summary>
-        </member>
         <member name="T:RazorEngine.Templating.IInternalTemplateService">
             <summary>
             A internal contract for the <see cref="T:RazorEngine.Templating.TemplateBase"/> class.
             </summary>
         </member>
-        <member name="M:RazorEngine.Templating.IInternalTemplateService.Resolve(System.String,System.Object,System.Type,RazorEngine.Templating.ResolveType)">
+        <member name="M:RazorEngine.Templating.IInternalTemplateService.Resolve(System.String,System.Object,System.Type,RazorEngine.Templating.DynamicViewBag,RazorEngine.Templating.ResolveType)">
             <summary>
             Resolves the template, this is for internal use only
             </summary>
@@ -5938,7 +5980,7 @@
             </summary>
             <param name="ns">The namespace to be imported.</param>
         </member>
-        <member name="M:RazorEngine.Templating.IInternalTemplateService.CreateExecuteContext(RazorEngine.Templating.DynamicViewBag)">
+        <member name="M:RazorEngine.Templating.IInternalTemplateService.CreateExecuteContext">
             <summary>
             Creates a new <see cref="T:RazorEngine.Templating.ExecuteContext"/> used to tracking templates.
             </summary>
@@ -5977,7 +6019,7 @@
             Gets the template type.
             </summary>
         </member>
-        <member name="M:RazorEngine.Templating.InternalTemplateService.Resolve(System.String,System.Object,System.Type,RazorEngine.Templating.ResolveType)">
+        <member name="M:RazorEngine.Templating.InternalTemplateService.Resolve(System.String,System.Object,System.Type,RazorEngine.Templating.DynamicViewBag,RazorEngine.Templating.ResolveType)">
             <summary>
             Resolves the template with the specified name.
             </summary>
@@ -5993,7 +6035,7 @@
             </summary>
             <param name="ns">The namespace to be imported.</param>
         </member>
-        <member name="M:RazorEngine.Templating.InternalTemplateService.CreateExecuteContext(RazorEngine.Templating.DynamicViewBag)">
+        <member name="M:RazorEngine.Templating.InternalTemplateService.CreateExecuteContext">
             <summary>
             Creates a new <see cref="T:RazorEngine.Templating.ExecuteContext"/> for tracking templates.
             </summary>
@@ -6041,7 +6083,7 @@
             <summary>
             Creates a new <see cref="T:RazorEngine.Templating.ExecuteContext"/> used to tracking templates.
             </summary>
-            <param name="viewBag">The view bag.</param>
+            <param name="viewBag">This parameter is ignored, set the Viewbag with template.SetData(null, viewBag)</param>
             <returns>The instance of <see cref="T:RazorEngine.Templating.ExecuteContext"/></returns>
         </member>
         <member name="M:RazorEngine.Templating.ITemplateService.Compile(System.String,System.Type,System.String)">
@@ -6263,7 +6305,7 @@
             <summary>
             Creates a new <see cref="T:RazorEngine.Templating.ExecuteContext"/> for tracking templates.
             </summary>
-            <param name="viewBag">The dynamic view bag.</param>
+            <param name="viewBag">This parameter is ignored, set the Viewbag with template.SetData(null, viewBag)</param>
             <returns>The execute context.</returns>
         </member>
         <member name="M:RazorEngine.Templating.TemplateService.CreateInstanceContext(System.Type)">
@@ -6666,7 +6708,7 @@
             <summary>
             Creates a new <see cref="T:RazorEngine.Templating.ExecuteContext"/> used to tracking templates.
             </summary>
-            <param name="viewBag">The view bag.</param>
+            <param name="viewBag">This parameter is ignored, set the Viewbag with template.SetData(null, viewBag)</param>
             <returns>The instance of <see cref="T:RazorEngine.Templating.ExecuteContext"/></returns>
         </member>
         <member name="M:RazorEngine.Templating.IsolatedTemplateService.Compile(System.String,System.Type,System.String)">
@@ -6970,7 +7012,7 @@
             We need this for creating the templates.
             </summary>
         </member>
-        <member name="M:RazorEngine.Templating.RazorEngineCore.CreateExecuteContext(RazorEngine.Templating.DynamicViewBag)">
+        <member name="M:RazorEngine.Templating.RazorEngineCore.CreateExecuteContext">
             <summary>
             Creates a new <see cref="T:RazorEngine.Templating.ExecuteContext"/> for tracking templates.
             </summary>
@@ -6984,7 +7026,7 @@
             <param name="key">The string template.</param>
             <param name="modelType">The model type.</param>
         </member>
-        <member name="M:RazorEngine.Templating.RazorEngineCore.CreateTemplate(RazorEngine.Templating.ICompiledTemplate,System.Object)">
+        <member name="M:RazorEngine.Templating.RazorEngineCore.CreateTemplate(RazorEngine.Templating.ICompiledTemplate,System.Object,RazorEngine.Templating.DynamicViewBag)">
             <summary>
             Creates an instance of <see cref="T:RazorEngine.Templating.ITemplate"/> from the specified string template.
             </summary>

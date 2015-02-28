@@ -84,7 +84,7 @@ namespace Hsking.Api.Dao.AuthManagers
 
         public Task<bool> GetEmailConfirmedAsync(ApplicationUser user)
         {
-            return Task.FromResult(user.ConfirmEmail);
+            throw new NotImplementedException();
         }
 
         public Task SetEmailAsync(ApplicationUser user, string email)
@@ -94,11 +94,12 @@ namespace Hsking.Api.Dao.AuthManagers
 
         public Task SetEmailConfirmedAsync(ApplicationUser user, bool confirmed)
         {
-            return Task.FromResult(user.ConfirmEmail=confirmed);
+            throw new NotImplementedException();
         }
 
         public Task<string> GetSecurityStampAsync(ApplicationUser user)
         {
+          
             return Task.FromResult(user.EmailStamp);
         }
 

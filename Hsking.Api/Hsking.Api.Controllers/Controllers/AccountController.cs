@@ -131,6 +131,10 @@ namespace Hsking.Api.Controllers.Controllers
                 return ErrorApiResult(1, errorsMessages);
             }
             var name = User.Identity.GetUserName();
+            if (name == null)
+            {
+                return ErrorApiResult(100, "User not exists");
+            }
             var userId = long.Parse(User.Identity.GetUserId());
             var result = await _userManager.ChangePasswordAsync(userId, model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -187,6 +191,10 @@ namespace Hsking.Api.Controllers.Controllers
                 return ErrorApiResult(1, errorsMessages);
             }
             var user = _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return ErrorApiResult(101, "User not finded");
+            }
             var token = await _userManager.GeneratePasswordResetTokenAsync(user.Result.Id);
 
             var callbackUrl = String.Format("{0}/#/recover?email={1}&token={2}", "http://localhost.ru", model.Email, WebUtility.UrlEncode(token));

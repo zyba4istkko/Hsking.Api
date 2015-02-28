@@ -27,7 +27,7 @@ namespace Hsking.Api.EfDao.Repositories
             user.Email = appUser.UserName;
             user.Password = appUser.PasswordHash;
             user.DateRegister = DateTime.Now;
-          
+            user.EmailStamp = appUser.EmailStamp;
             user.Profile = Db.Set<Profile>().Create();
             user.Profile.Id = user.Id;
 
@@ -42,7 +42,7 @@ namespace Hsking.Api.EfDao.Repositories
             var user = Db.Set<User>().FirstOrDefault(x => x.Id == appUser.Id);
             user.Email = appUser.UserName;
             user.Password = appUser.PasswordHash;
-         
+            user.EmailStamp = appUser.EmailStamp;
             base.Update(user);
             base.Save();
 
