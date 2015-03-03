@@ -6,7 +6,10 @@ using Microsoft.AspNet.Identity;
 
 namespace Hsking.Api.Dao.AuthManagers
 {
-    public class CustomUserStore : IUserStore<ApplicationUser,long>,IUserPasswordStore<ApplicationUser,long>,IUserEmailStore<ApplicationUser,long>,IUserSecurityStampStore<ApplicationUser,long>
+    public class CustomUserStore : IUserStore<ApplicationUser,long>,
+        IUserPasswordStore<ApplicationUser,long>,
+        IUserSecurityStampStore<ApplicationUser,long>,
+        IUserPhoneNumberStore<ApplicationUser,long>
     {
         private readonly IAuthRepository _repository;
 
@@ -67,12 +70,21 @@ namespace Hsking.Api.Dao.AuthManagers
             return Task.FromResult(user.PasswordHash = passwordHash);
         }
 
-        public Task<ApplicationUser> FindByEmailAsync(string email)
+    
+    
+
+        public Task<string> GetSecurityStampAsync(ApplicationUser user)
         {
-            return FindByNameAsync(email);
+          
+            return Task.FromResult(user.SecurityStamp);
         }
 
-        public Task<string> GetEmailAsync(ApplicationUser user)
+        public Task SetSecurityStampAsync(ApplicationUser user, string stamp)
+        {
+            return Task.FromResult(user.SecurityStamp=stamp);
+        }
+
+        public Task<string> GetPhoneNumberAsync(ApplicationUser user)
         {
             if (user == null)
             {
@@ -82,30 +94,24 @@ namespace Hsking.Api.Dao.AuthManagers
             return Task.FromResult(user.UserName);
         }
 
-        public Task<bool> GetEmailConfirmedAsync(ApplicationUser user)
+        public Task<bool> GetPhoneNumberConfirmedAsync(ApplicationUser user)
+        {
+           if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            return Task.FromResult(user.ConfirmPhone);
+        }
+
+        public Task SetPhoneNumberAsync(ApplicationUser user, string phoneNumber)
         {
             throw new NotImplementedException();
         }
 
-        public Task SetEmailAsync(ApplicationUser user, string email)
+        public Task SetPhoneNumberConfirmedAsync(ApplicationUser user, bool confirmed)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task SetEmailConfirmedAsync(ApplicationUser user, bool confirmed)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> GetSecurityStampAsync(ApplicationUser user)
-        {
-          
-            return Task.FromResult(user.EmailStamp);
-        }
-
-        public Task SetSecurityStampAsync(ApplicationUser user, string stamp)
-        {
-            return Task.FromResult(user.EmailStamp=stamp);
+            return Task.FromResult(user.ConfirmPhone = confirmed);
         }
     }
 }

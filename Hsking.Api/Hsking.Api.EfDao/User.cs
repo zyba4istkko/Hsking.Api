@@ -15,10 +15,11 @@ namespace Hsking.Api.EfDao
     public partial class User
     {
         public long Id { get; set; }
-        public string Email { get; set; }
+        public string Phone { get; set; }
         public string Password { get; set; }
         public System.DateTime DateRegister { get; set; }
-        public string EmailStamp { get; set; }
+        public string SecurityStamp { get; set; }
+        public bool Confirm { get; set; }
     
         public virtual Profile Profile { get; set; }
     }

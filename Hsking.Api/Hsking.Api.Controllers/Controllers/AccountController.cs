@@ -23,16 +23,10 @@ namespace Hsking.Api.Controllers.Controllers
     public class AccountController : CustomApiController
     {
         private readonly CustomUserManager _userManager;
-        private readonly IProfileRepository _profileRepository;
-    
 
-
-        public AccountController(CustomUserManager userManager, IProfileRepository profileRepository)
+        public AccountController(CustomUserManager userManager)
         {
-
             _userManager = userManager;
-            _profileRepository = profileRepository;
-          
         }
 
         // POST api/Account/Register
@@ -50,13 +44,23 @@ namespace Hsking.Api.Controllers.Controllers
 
             var user = new ApplicationUser()
             {
-                UserName = userModel.Email,
+                UserName = userModel.Phone,
             };
-
-            var result = await _userManager.CreateAsync(user, userModel.Password);
+            var password = await _userManager.GeneratePassword();
+            
+            var result = await _userManager.CreateAsync(user, password);
 
             if (result.Succeeded)
             {
+                try
+                {
+                    await _userManager.SendSmsAsync(user.Id, password);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
+
                 return EmptyApiResult();
             }
             else
@@ -68,8 +72,6 @@ namespace Hsking.Api.Controllers.Controllers
 
         }
 
-       
-
         [System.Web.Http.Authorize]
         [System.Web.Http.Route("GetOrders")]
         [System.Web.Http.HttpPost]
@@ -77,8 +79,6 @@ namespace Hsking.Api.Controllers.Controllers
         {
             return EmptyApiResult();
         }
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -88,38 +88,6 @@ namespace Hsking.Api.Controllers.Controllers
 
             base.Dispose(disposing);
         }
-
-        private IHttpActionResult GetErrorResult(IdentityResult result)
-        {
-            if (result == null)
-            {
-                return InternalServerError();
-            }
-
-            if (!result.Succeeded)
-            {
-                if (result.Errors != null)
-                {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return ErrorApiResult(1, "Bad request");
-                }
-                var errorsMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
-
-                return ErrorApiResult(100, errorsMessages);
-            }
-
-            return null;
-        }
-
-
 
         [System.Web.Http.Authorize]
         [System.Web.Http.Route("ChangePassword")]
@@ -149,37 +117,14 @@ namespace Hsking.Api.Controllers.Controllers
         }
 
         [System.Web.Http.Authorize]
-        [System.Web.Http.Route("GetProfile")]
+        [System.Web.Http.Route("Test")]
         [System.Web.Http.HttpPost]
-        public async Task<IHttpActionResult> GetProfile()
+        public async Task<IHttpActionResult> Test()
         {
             var userId = long.Parse(User.Identity.GetUserId());
-            var profile = await _profileRepository.GetProfile(userId);
-            if (profile == null)
-            {
-                return ErrorApiResult(12, "Profile not finded");
-            }
-            else
-            {
-                return SuccessApiResult(profile);
-            }
-        }
-
-        [System.Web.Http.Authorize]
-        [System.Web.Http.Route("UpdateProfile")]
-        [System.Web.Http.HttpPost]
-        public async Task<IHttpActionResult> UpdateProfile(ProfileDto profileDto)
-        {
-            var userId = long.Parse(User.Identity.GetUserId());
-            profileDto.Id = userId;
-           
-            await _profileRepository.UpdateProfile(profileDto);
-          
-
+            await _userManager.SendSmsAsync(userId, "hallo");
             return EmptyApiResult();
         }
-
-
 
         [System.Web.Http.Route("RecoverPassword")]
         [System.Web.Http.HttpPost]
@@ -190,49 +135,14 @@ namespace Hsking.Api.Controllers.Controllers
                 var errorsMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
                 return ErrorApiResult(1, errorsMessages);
             }
-            var user = _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                return ErrorApiResult(101, "User not finded");
-            }
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user.Result.Id);
-
-            var callbackUrl = String.Format("{0}/#/recover?email={1}&token={2}", "http://localhost.ru", model.Email, WebUtility.UrlEncode(token));
-            await _userManager.SendEmailAsync(user.Result.Id, "RecoverPassword", callbackUrl);
+         
+            var user =await _userManager.FindByNameAsync(model.Phone);
+            await _userManager.RemovePasswordAsync(user.Id);
+            var newPassword = await _userManager.GeneratePassword();
+            await _userManager.AddPasswordAsync(user.Id, newPassword);
+            await _userManager.SendSmsAsync(user.Id, newPassword);
             return EmptyApiResult();
         }
-
-        [System.Web.Http.Route("ResetPassword")]
-        [System.Web.Http.HttpPost]
-        public async Task<IHttpActionResult> ResetPassword(ResetPasswordModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                var errorsMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
-                return ErrorApiResult(1, errorsMessages);
-            }
-            var user = await _userManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                ModelState.AddModelError("", "No user found.");
-                var errorsMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
-                return ErrorApiResult(1, errorsMessages);
-            }
-            IdentityResult result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return EmptyApiResult();
-            }
-            else
-            {
-                var errorsMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
-                return ErrorApiResult(1, errorsMessages);
-            }
-
-        }
-
-
-
 
     }
 }

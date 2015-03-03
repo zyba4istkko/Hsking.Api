@@ -84,6 +84,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RazorEngine.3.6.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -116,18 +119,20 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Twilio.Api">
+      <HintPath>..\packages\Twilio.3.6.27\lib\3.5\Twilio.Api.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthManagers\CustomPasswordHasher.cs" />
     <Compile Include="AuthManagers\CustomUserManager.cs" />
     <Compile Include="AuthManagers\CustomUserStore.cs" />
-    <Compile Include="Emails\AuthEmailService.cs" />
-    <Compile Include="Emails\Mailers\IUserMailer.cs" />
-    <Compile Include="Emails\Mailers\UserMailer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAuthRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\IProfileRepository.cs" />
+    <Compile Include="Sms\SmsService.cs" />
+    <Compile Include="Sms\SmsServiceInitializator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hsking.Api.Dto\Hsking.Api.Dto.csproj">

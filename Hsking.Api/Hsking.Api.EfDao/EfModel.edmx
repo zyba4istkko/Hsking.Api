@@ -52,10 +52,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="300" />
           <Property Name="DateRegister" Type="datetime" Nullable="false" />
-          <Property Name="EmailStamp" Type="nvarchar" MaxLength="200" />
+          <Property Name="SecurityStamp" Type="nvarchar" MaxLength="200" />
+          <Property Name="Confirm" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Habits_Category">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
@@ -187,11 +188,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="DateRegister" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Profile" Relationship="EfContext.FK_Profiles_USERS" FromRole="User" ToRole="Profile" />
-          <Property Name="EmailStamp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Confirm" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Habits_Category">
           <End Type="EfContext.Category" Role="Category" Multiplicity="1" />
@@ -229,7 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -284,10 +286,11 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="EfContext.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="EmailStamp" ColumnName="EmailStamp" />
+                <ScalarProperty Name="Confirm" ColumnName="Confirm" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
                 <ScalarProperty Name="DateRegister" ColumnName="DateRegister" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

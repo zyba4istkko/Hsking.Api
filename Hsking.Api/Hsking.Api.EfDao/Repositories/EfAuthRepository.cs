@@ -24,10 +24,11 @@ namespace Hsking.Api.EfDao.Repositories
         public Task RegisterUser(ApplicationUser appUser)
         {
             var user = Db.Set<User>().Create();
-            user.Email = appUser.UserName;
+            user.Phone = appUser.UserName;
             user.Password = appUser.PasswordHash;
             user.DateRegister = DateTime.Now;
-            user.EmailStamp = appUser.EmailStamp;
+            user.SecurityStamp = appUser.SecurityStamp;
+            user.Confirm = appUser.ConfirmPhone;
             user.Profile = Db.Set<Profile>().Create();
             user.Profile.Id = user.Id;
 
@@ -40,9 +41,9 @@ namespace Hsking.Api.EfDao.Repositories
         public Task UpdateUser(ApplicationUser appUser)
         {
             var user = Db.Set<User>().FirstOrDefault(x => x.Id == appUser.Id);
-            user.Email = appUser.UserName;
+            user.Phone = appUser.UserName;
             user.Password = appUser.PasswordHash;
-            user.EmailStamp = appUser.EmailStamp;
+            user.SecurityStamp = appUser.SecurityStamp;
             base.Update(user);
             base.Save();
 
@@ -51,14 +52,14 @@ namespace Hsking.Api.EfDao.Repositories
 
         public async Task<ApplicationUser> FindUser(string userName, string password)
         {
-            var user = Db.Set<User>().FirstOrDefault(x => x.Email == userName);
+            var user = Db.Set<User>().FirstOrDefault(x => x.Phone == userName);
 
             if (user == null)
             {
                 return null;
             }
 
-            return new ApplicationUser() { Id = user.Id, PasswordHash = user.Password, UserName = user.Email};
+            return new ApplicationUser() { Id = user.Id, PasswordHash = user.Password, UserName = user.Phone};
         }
 
 
@@ -71,7 +72,7 @@ namespace Hsking.Api.EfDao.Repositories
             {
                 return null;
             }
-            return new ApplicationUser() { Id = user.Id, PasswordHash = user.Password, UserName = user.Email };
+            return new ApplicationUser() { Id = user.Id, PasswordHash = user.Password, UserName = user.Phone };
         }
     }
 }

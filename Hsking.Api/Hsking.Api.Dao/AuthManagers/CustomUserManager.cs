@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Hsking.Api.Dto.AuthUsers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -8,13 +9,15 @@ namespace Hsking.Api.Dao.AuthManagers
 {
     public class CustomUserManager : UserManager<ApplicationUser,long>
     {
-        public CustomUserManager(IUserStore<ApplicationUser, long> store,IPasswordHasher hasher,IIdentityMessageService emailService,DataProtectorTokenProvider<ApplicationUser, long> dataProtectorProvider)
+        public CustomUserManager(IUserStore<ApplicationUser, long> store,IPasswordHasher hasher,DataProtectorTokenProvider<ApplicationUser, long> dataProtectorProvider,IIdentityMessageService smsService)
             : base(store)
         {
             var provider = new DpapiDataProtectionProvider("Sample");
             this.PasswordHasher = hasher;
-            this.EmailService = emailService;
+            this.SmsService = smsService;
             this.UserTokenProvider = dataProtectorProvider;
+            (this.UserValidator as UserValidator<ApplicationUser, long>).AllowOnlyAlphanumericUserNames = false;
+          
         }
 
         public override Task<ApplicationUser> FindAsync(string userName, string password)
@@ -31,6 +34,11 @@ namespace Hsking.Api.Dao.AuthManagers
             return taskInvoke;
         }
 
-        
+        public Task<string> GeneratePassword()
+        {
+            var generator = new Random();
+            var newPassword = generator.Next(0, 1000000).ToString("D6");
+            return Task.FromResult(newPassword);
+        } 
     }
 }

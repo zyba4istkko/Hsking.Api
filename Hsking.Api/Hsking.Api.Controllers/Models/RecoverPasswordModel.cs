@@ -8,6 +8,6 @@ namespace Hsking.Api.Controllers.Models
 {
     public class RecoverPasswordModel
     {
-        public string Email { get; set; }
+        public string Phone { get; set; }
     }
 }

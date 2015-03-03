@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Hsking.Api.Controllers;
 using Hsking.Api.Dao.AuthManagers;
-using Hsking.Api.Dao.Emails;
-using Hsking.Api.Dao.Emails.Mailers;
+using Hsking.Api.Dao.Sms;
 using Hsking.Api.Dto.AuthUsers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -27,10 +27,17 @@ namespace Hsking.Api.Dependencies.Installers
             container.Register(
                 Component.For<DataProtectorTokenProvider<ApplicationUser, long>>().LifestyleTransient());
 
-            container.Register(Component.For<IIdentityMessageService>().ImplementedBy<AuthEmailService>().LifestyleTransient());
+            container.Register(
+             Component.For<SmsServiceInitializator>()
+                 .Instance(new SmsServiceInitializator(ConfigurationManager.AppSettings["TwilioSid"],
+                     ConfigurationManager.AppSettings["TwilioFromPhone"],
+                     ConfigurationManager.AppSettings["TwilioToken"])));
+            container.Register(
+               Component.For<IIdentityMessageService>().ImplementedBy<SmsService>()
+                   .LifestyleTransient());
+          
             container.Register(Component.For<IPasswordHasher>().ImplementedBy<PasswordHasher>().LifestyleTransient());
-            container.Register(Component.For<IUserMailer>().ImplementedBy<UserMailer>().LifestyleTransient());
-
+        
             container.Register(
               Component.For<IUserStore<ApplicationUser, long>>().ImplementedBy<CustomUserStore>().LifestyleTransient());
 
