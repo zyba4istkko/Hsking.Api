@@ -1,8 +1,0 @@
-﻿CREATE TABLE [dbo].[Types]
-(
-	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1), 
-    [Name] NVARCHAR(40) NOT NULL, 
-    [Description] NVARCHAR(80) NULL,
-
-
-)

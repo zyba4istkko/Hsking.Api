@@ -5,14 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="da840dc29ec740e4ba3a755a1aa98ff3" Name="Diagram1">
-        <EntityTypeShape EntityType="EfContext.Category" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="EfContext.Category" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="EfContext.DefaultShedule" Width="1.5" PointX="5.25" PointY="1.75" />
         <EntityTypeShape EntityType="EfContext.Habit" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="EfContext.Profile" Width="1.5" PointX="5" PointY="5" />
-        <EntityTypeShape EntityType="EfContext.Type" Width="1.5" PointX="0.75" PointY="5.5" />
-        <EntityTypeShape EntityType="EfContext.User" Width="1.5" PointX="2.75" PointY="5.25" />
+        <EntityTypeShape EntityType="EfContext.Profile" Width="1.5" PointX="8" PointY="5" />
+        <EntityTypeShape EntityType="EfContext.ShedulerValue" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="EfContext.Type" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="EfContext.User" Width="1.5" PointX="5.75" PointY="5.125" />
         <AssociationConnector Association="EfContext.FK_Habits_Category" />
+        <AssociationConnector Association="EfContext.FK_DefaultShedules_Habits" />
+        <AssociationConnector Association="EfContext.FK_DefaultShedules_ShedulerValues" />
         <AssociationConnector Association="EfContext.FK_Habits_Types" />
         <AssociationConnector Association="EfContext.FK_Profiles_USERS" />
+        <EntityTypeShape EntityType="EfContext.UserHabit" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="EfContext.UserHabitStatus" Width="1.5" PointX="5.75" PointY="8.5" />
+        <AssociationConnector Association="EfContext.FK_UserHabits_Habits" />
+        <AssociationConnector Association="EfContext.FK_UserHabits_Statuses" />
+        <AssociationConnector Association="EfContext.FK_UserHabits_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

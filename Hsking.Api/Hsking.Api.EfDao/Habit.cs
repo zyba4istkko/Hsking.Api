@@ -14,6 +14,12 @@ namespace Hsking.Api.EfDao
     
     public partial class Habit
     {
+        public Habit()
+        {
+            this.DefaultShedules = new HashSet<DefaultShedule>();
+            this.UserHabits = new HashSet<UserHabit>();
+        }
+    
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -22,8 +28,12 @@ namespace Hsking.Api.EfDao
         public string ImageUrl { get; set; }
         public long CategoryId { get; set; }
         public long TypeId { get; set; }
+        public string PushText { get; set; }
+        public int NumberOfReminder { get; set; }
     
         public virtual Category Category { get; set; }
+        public virtual ICollection<DefaultShedule> DefaultShedules { get; set; }
         public virtual Type Type { get; set; }
+        public virtual ICollection<UserHabit> UserHabits { get; set; }
     }
 }

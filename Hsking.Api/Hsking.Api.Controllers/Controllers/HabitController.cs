@@ -27,8 +27,8 @@ namespace Hsking.Api.Controllers.Controllers
         [System.Web.Http.HttpPost]
         public async Task<IHttpActionResult> GetHabits()
         {
-            var countriesList = await _habitsRepository.GetCommonHabits();
-            return SuccessApiResult(countriesList.ToList());
+            var habits = await _habitsRepository.GetCommonHabits();
+            return SuccessApiResult(habits);
         }
     }
 }

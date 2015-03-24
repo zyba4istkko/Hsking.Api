@@ -24,7 +24,10 @@ namespace Hsking.Api.EfDao.Repositories
                 ImageUrl = x.ImageUrl,
                 Name = x.Name,
                 Solution = x.Solution,
-                Type = new TypeDto() {Description = x.Type.Description,Name = x.Type.Name}
+                Type = new TypeDto() {Description = x.Type.Description,Name = x.Type.Name},
+                NumberOfReminder = x.NumberOfReminder,
+                PushText = x.PushText,
+                DefaultShedules = x.DefaultShedules.Select(y=>new DefaultSheduleDto(){Value = y.ShedulerValue.Value}).ToList()
             }).ToList();
         }
 

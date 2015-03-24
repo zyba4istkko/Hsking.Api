@@ -65,6 +65,9 @@
     <Compile Include="Category.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DefaultShedule.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EfModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,10 +93,19 @@
     <Compile Include="Repositories\EfAuthRepository.cs" />
     <Compile Include="Repositories\HabitsRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
+    <Compile Include="ShedulerValue.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Type.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserHabit.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserHabitStatus.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

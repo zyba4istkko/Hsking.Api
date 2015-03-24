@@ -12,21 +12,13 @@ namespace Hsking.Api.EfDao
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class DefaultShedule
     {
-        public User()
-        {
-            this.UserHabits = new HashSet<UserHabit>();
-        }
-    
         public long Id { get; set; }
-        public string Phone { get; set; }
-        public string Password { get; set; }
-        public System.DateTime DateRegister { get; set; }
-        public string SecurityStamp { get; set; }
-        public bool Confirm { get; set; }
+        public long HabitId { get; set; }
+        public long ShedulerValueId { get; set; }
     
-        public virtual Profile Profile { get; set; }
-        public virtual ICollection<UserHabit> UserHabits { get; set; }
+        public virtual Habit Habit { get; set; }
+        public virtual ShedulerValue ShedulerValue { get; set; }
     }
 }

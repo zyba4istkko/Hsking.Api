@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AuthUsers\ApplicationUser.cs" />
     <Compile Include="Dtos\CategoryDto.cs" />
+    <Compile Include="Dtos\DefaultSheduleDto.cs" />
     <Compile Include="Dtos\HabitDto.cs" />
     <Compile Include="Dtos\ProfileDto.cs" />
     <Compile Include="Dtos\TypeDto.cs" />

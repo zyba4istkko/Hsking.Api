@@ -26,9 +26,13 @@ namespace Hsking.Api.EfDao
         }
     
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<DefaultShedule> DefaultShedules { get; set; }
         public virtual DbSet<Habit> Habits { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<ShedulerValue> ShedulerValues { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserHabit> UserHabits { get; set; }
+        public virtual DbSet<UserHabitStatus> UserHabitStatuses { get; set; }
     }
 }
