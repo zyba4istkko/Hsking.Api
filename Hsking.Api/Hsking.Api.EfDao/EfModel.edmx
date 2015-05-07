@@ -28,13 +28,14 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="600" />
-          <Property Name="Solution" Type="nvarchar" MaxLength="600" />
+          <Property Name="Solution" Type="nvarchar" MaxLength="4000" />
           <Property Name="Feature" Type="nvarchar" MaxLength="600" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="150" />
           <Property Name="CategoryId" Type="bigint" Nullable="false" />
           <Property Name="TypeId" Type="bigint" Nullable="false" />
           <Property Name="PushText" Type="nvarchar" MaxLength="120" Nullable="false" />
           <Property Name="NumberOfReminder" Type="int" Nullable="false" />
+          <Property Name="Background" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Profiles">
           <Key>
@@ -305,7 +306,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="600" FixedLength="false" Unicode="true" />
-          <Property Name="Solution" Type="String" MaxLength="600" FixedLength="false" Unicode="true" />
+          <Property Name="Solution" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Feature" Type="String" MaxLength="600" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CategoryId" Type="Int64" Nullable="false" />
@@ -316,6 +317,7 @@
           <NavigationProperty Name="DefaultShedules" Relationship="EfContext.FK_DefaultShedules_Habits" FromRole="Habit" ToRole="DefaultShedule" />
           <NavigationProperty Name="Type" Relationship="EfContext.FK_Habits_Types" FromRole="Habit" ToRole="Type" />
           <NavigationProperty Name="UserHabits" Relationship="EfContext.FK_UserHabits_Habits" FromRole="Habit" ToRole="UserHabit" />
+          <Property Name="Background" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -506,6 +508,7 @@
           <EntitySetMapping Name="Habits">
             <EntityTypeMapping TypeName="EfContext.Habit">
               <MappingFragment StoreEntitySet="Habits">
+                <ScalarProperty Name="Background" ColumnName="Background" />
                 <ScalarProperty Name="NumberOfReminder" ColumnName="NumberOfReminder" />
                 <ScalarProperty Name="PushText" ColumnName="PushText" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />

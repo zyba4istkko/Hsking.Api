@@ -8,6 +8,7 @@ namespace Hsking.Api.Dto.Dtos
 {
     public class HabitDto
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Solution { get; set; }
@@ -15,7 +16,7 @@ namespace Hsking.Api.Dto.Dtos
         public string ImageUrl { get; set; }
         public string PushText { get; set; }
         public int NumberOfReminder { get; set; }
-
+        public string Background { get; set; }
         public CategoryDto Category { get; set; }
 
         public TypeDto Type { get; set; }

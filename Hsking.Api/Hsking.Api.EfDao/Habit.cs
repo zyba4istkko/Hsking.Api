@@ -30,6 +30,7 @@ namespace Hsking.Api.EfDao
         public long TypeId { get; set; }
         public string PushText { get; set; }
         public int NumberOfReminder { get; set; }
+        public string Background { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual ICollection<DefaultShedule> DefaultShedules { get; set; }

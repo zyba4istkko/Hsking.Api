@@ -23,6 +23,8 @@ namespace Hsking.Api.EfDao.Repositories
                 Feature = x.Feature,
                 ImageUrl = x.ImageUrl,
                 Name = x.Name,
+                Id = x.Id,
+                Background = x.Background,
                 Solution = x.Solution,
                 Type = new TypeDto() {Description = x.Type.Description,Name = x.Type.Name},
                 NumberOfReminder = x.NumberOfReminder,
